@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Pet for home</title>
+        <link rel="stylesheet" href="./css/stylesheet.css">
+        <link rel="stylesheet" href="./css/mainNav.css">
+    </head>
+
+    <body>
+        <header class="mainHeader">
+
+            <h1 id="headerCaption">Приют за животни "Pet for home" </h1><hr>
+
+            <nav class="navigation">
+
+                <ul id="topNav">
+                    <li><a href="index.html">Начало</a></li>
+                    <li class="active"><a href="avaliable-pets.html">Налични животни</a></li>
+                    <li><a href="add-pets.html">Добави животни</a></li>
+                </ul>
+
+            </nav>
+
+        </header>
+
+        <main class="mainContent">
+            <button type="submit" id="petButton">покажи всички</button>
+
+        </main>
+
+        <footer class="mainFooter">
+            <p>© 2021 Bobster STUDIO</p>
+        </footer>
+
+
+        <script type="text/javascript">
+
+            // Създаваме масив с заглавията на таблицата
+            const captionArray = [
+                            "Име", "Вид", "Порода", "Възраст", "Тегло"
+                        ]
+            // Създаваме масив с съдържанието на таблицата
+            const petArray = [
+                ["Бък", "куче", "доберман", "1г.", "35кг."],
+                ["Джеси", "куче", "пинчер", "6м", "5кг."],
+                ["Миси", "котка", "британска", "4г.", "3кг."],
+                ["Мърчо", "котка", "персийска", "3г.", "2,5кг"]
+                ];
+            //създаваме евент на бутона и добавяме функцията към него
+            const button = document.querySelector("#petButton");
+            button.addEventListener('click',generateTableJS);
+
+            function generateTableJS() {
+                // правим справка за елемента в който ще бъде таблицата
+                let body = document.getElementsByTagName("main")[0];
+
+                // Създаване на елементите <table>, <thead> и <tbody>   
+                let tableJS = document.createElement("table");
+                let tableHead = document.createElement("thead");
+                let tableBody = document.createElement("tbody");
+
+                // създаване на всички клетки
+                for (let i = 0; i < petArray.length; i++) {
+
+                    // създаване на ред в таблицата
+                    let tableHeadRow = document.createElement("tr");
+                    let tableRow = document.createElement("tr");
+                    for (let j = 0; j < captionArray.length; j++) {
+
+                    // създаваме елементите <th> и <td> и попълваме елементите на 2та масива в таблицата
+                    let cellHead = document.createElement("th");
+                    let cellHeadText = document.createTextNode(captionArray[j]);
+                    let cell = document.createElement("td");
+                    let cellText = document.createTextNode(petArray[i][j]);
+                    cellHead.appendChild(cellHeadText);
+                    tableHeadRow.appendChild(cellHead)
+                    cell.appendChild(cellText);
+                    tableRow.appendChild(cell);
+                    }
+
+                    tableBody.appendChild(tableRow);
+                    tableHead.appendChild(tableHeadRow);
+                }
+
+                tableJS.appendChild(tableHead);
+                // слагаме елемента <tbody> в таблицата <table>
+                tableJS.appendChild(tableBody);
+                // Добавяме <table> в <body>
+                body.appendChild(tableJS);
+                // задаваме граници на таблицата
+                }
+            generateTableJS();
+
+        </script>
+    </body>
+</html>
